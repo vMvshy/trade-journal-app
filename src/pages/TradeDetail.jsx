@@ -106,13 +106,19 @@ export default function TradeDetail() {
             ← Back to Journal
           </Link>
 
-          <button
-            className="delete-button"
-            onClick={handleDelete}
-            disabled={deleting}
-          >
-            {deleting ? "Deleting..." : "Delete Trade"}
-          </button>
+          <div className="detail-actions">
+            <Link className="edit-trade-button" to={`/trade/${id}/edit`}>
+              Edit Trade
+            </Link>
+
+            <button
+              className="delete-button"
+              onClick={handleDelete}
+              disabled={deleting}
+            >
+              {deleting ? "Deleting..." : "Delete Trade"}
+            </button>
+          </div>
         </div>
 
         <section className="trade-book-page">

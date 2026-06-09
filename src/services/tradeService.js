@@ -87,3 +87,20 @@ export async function getTradeById(tradeId, userId) {
 
   return data;
 }
+
+// Actualizar un trade existente.
+export async function updateTrade(tradeId, userId, tradeData) {
+  const { data, error } = await supabase
+    .from("trades")
+    .update(tradeData)
+    .eq("id", tradeId)
+    .eq("user_id", userId)
+    .select()
+    .single();
+
+  if (error) {
+    throw error;
+  }
+
+  return data;
+}

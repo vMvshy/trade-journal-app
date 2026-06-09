@@ -15,6 +15,7 @@ import NewTrade from "./pages/NewTrade";
 import Notes from "./pages/Notes";
 import Profile from "./pages/Profile";
 import TradeDetail from "./pages/TradeDetail";
+import EditTrade from "./pages/EditTrade";
 // Importamos los estilos principales.
 import "./index.css";
 
@@ -85,6 +86,14 @@ export default function App() {
   element={
     <ProtectedRoute>
       <TradeDetail />
+    </ProtectedRoute>
+  }
+/>
+<Route
+  path="/trade/:id/edit"
+  element={
+    <ProtectedRoute>
+      <EditTrade />
     </ProtectedRoute>
   }
 />
