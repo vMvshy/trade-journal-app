@@ -78,16 +78,16 @@ export default function Register() {
           />
         </div>
 
-        <h1>Build your trading archive.</h1>
+        <h1>Build your trading edge.</h1>
         <p>
-          Create your private trading book with notes, screenshots, patterns and
-          analytics.
+          Create a private workspace to track trades, document decisions, save
+          trade visuals, and turn every review into better execution.
         </p>
       </div>
 
       <div className="auth-card exora-auth-card large">
         <h1>Create Account</h1>
-        <p className="auth-subtitle">Start your private Exora journal</p>
+        <p className="auth-subtitle">Create your private Exora workspace</p>
 
         <form onSubmit={handleRegister} className="auth-form">
           <label>Full name</label>
@@ -102,7 +102,7 @@ export default function Register() {
           <label>Username</label>
           <input
             type="text"
-            placeholder="example: trader.jorge"
+            placeholder="example: trader.edge"
             value={username}
             onChange={(e) => handleUsernameChange(e.target.value)}
             required

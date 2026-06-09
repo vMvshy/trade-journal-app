@@ -48,8 +48,7 @@ export default function Login() {
 
         <h1>Trade with memory.</h1>
         <p>
-          Your private trading journal for screenshots, notes, emotions,
-          strategies and performance.
+          Your private trading workspace for tracking trades, refining strategy, and reviewing performance.
         </p>
       </div>
 
