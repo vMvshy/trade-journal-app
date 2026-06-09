@@ -759,3 +759,113 @@ body {
   font-size: 13px;
   text-transform: capitalize;
 }
+
+/* Dashboard real con estadísticas */
+.dashboard-grid {
+  margin-top: 28px;
+  display: grid;
+  grid-template-columns: 1.5fr 1fr;
+  gap: 18px;
+}
+
+.dashboard-panel {
+  background: #111821;
+  border: 1px solid #243244;
+  border-radius: 22px;
+  padding: 26px;
+}
+
+.dashboard-panel h2 {
+  margin-top: 0;
+}
+
+.summary-list {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.summary-list div {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #0b1118;
+  border: 1px solid #1f2a38;
+  border-radius: 14px;
+  padding: 14px;
+}
+
+.summary-list span {
+  color: #9fb0c3;
+}
+
+.summary-list strong {
+  color: #ffffff;
+}
+
+.profit-text {
+  color: #4ade80 !important;
+}
+
+.loss-text {
+  color: #f87171 !important;
+}
+
+.recent-panel {
+  margin-top: 28px;
+}
+
+.panel-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.panel-header a {
+  color: #60a5fa;
+  text-decoration: none;
+  font-weight: 700;
+}
+
+.recent-trades-list {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.recent-trade-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 18px;
+  background: #0b1118;
+  border: 1px solid #1f2a38;
+  border-radius: 16px;
+  padding: 16px;
+}
+
+.recent-trade-item h3 {
+  margin: 0;
+}
+
+.recent-trade-item p {
+  margin: 6px 0 0;
+  color: #9fb0c3;
+}
+
+.recent-trade-right {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+@media (max-width: 1000px) {
+  .dashboard-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .recent-trade-item {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
