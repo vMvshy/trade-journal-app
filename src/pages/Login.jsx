@@ -1,14 +1,13 @@
-// Importamos hooks de React y herramientas de navegación.
+// Página de login de Exora.
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { Sparkles } from "lucide-react";
 import { supabase } from "../lib/supabaseClient";
 
 export default function Login() {
-  // Estados para guardar lo que escribe el usuario.
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  // Estados para manejar carga y errores.
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
@@ -36,10 +35,28 @@ export default function Login() {
   };
 
   return (
-    <div className="auth-page">
-      <div className="auth-card">
-        <h1>Trade Journal</h1>
-        <p className="auth-subtitle">Login to your personal trading book</p>
+    <div className="auth-page exora-auth-page">
+      <div className="stars-layer"></div>
+      <div className="grid-layer"></div>
+
+      <div className="auth-hero-copy">
+        <div className="auth-brand">
+          <div className="brand-icon big">
+            <Sparkles size={26} />
+          </div>
+          <span>Exora</span>
+        </div>
+
+        <h1>Trade with memory.</h1>
+        <p>
+          Your private trading journal for screenshots, notes, emotions,
+          strategies and performance.
+        </p>
+      </div>
+
+      <div className="auth-card exora-auth-card">
+        <h1>Welcome back</h1>
+        <p className="auth-subtitle">Login to your Exora trading space</p>
 
         <form onSubmit={handleLogin} className="auth-form">
           <label>Email</label>

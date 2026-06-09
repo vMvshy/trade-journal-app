@@ -1,23 +1,21 @@
-// Importamos hooks de React y herramientas de navegación.
+// Página de registro de Exora.
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { Sparkles } from "lucide-react";
 import { supabase } from "../lib/supabaseClient";
 
 export default function Register() {
-  // Datos del formulario de registro.
   const [fullName, setFullName] = useState("");
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
 
-  // Estados para controlar errores y carga.
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
   const navigate = useNavigate();
 
-  // Esta función limpia el username para mantenerlo en minúsculas.
   const handleUsernameChange = (value) => {
     setUsername(value.toLowerCase());
   };
@@ -27,13 +25,11 @@ export default function Register() {
     e.preventDefault();
     setError("");
 
-    // Validamos que las contraseñas coincidan.
     if (password !== confirmPassword) {
       setError("Passwords do not match.");
       return;
     }
 
-    // Validamos el username antes de enviarlo a Supabase.
     const usernameRegex = /^[a-z0-9._]{3,20}$/;
 
     if (!usernameRegex.test(username)) {
@@ -45,8 +41,6 @@ export default function Register() {
 
     setLoading(true);
 
-    // Creamos el usuario y enviamos full_name y username como metadata.
-    // El trigger de Supabase crea automáticamente el perfil en la tabla profiles.
     const { data, error } = await supabase.auth.signUp({
       email,
       password,
@@ -65,8 +59,6 @@ export default function Register() {
       return;
     }
 
-    // Si Supabase permite login automático, mandamos al dashboard.
-    // Si tiene email confirmation activo, mandamos al login.
     if (data.session) {
       navigate("/dashboard");
     } else {
@@ -75,10 +67,28 @@ export default function Register() {
   };
 
   return (
-    <div className="auth-page">
-      <div className="auth-card large">
+    <div className="auth-page exora-auth-page">
+      <div className="stars-layer"></div>
+      <div className="grid-layer"></div>
+
+      <div className="auth-hero-copy">
+        <div className="auth-brand">
+          <div className="brand-icon big">
+            <Sparkles size={26} />
+          </div>
+          <span>Exora</span>
+        </div>
+
+        <h1>Build your trading archive.</h1>
+        <p>
+          Create your private trading book with notes, screenshots, patterns and
+          analytics.
+        </p>
+      </div>
+
+      <div className="auth-card exora-auth-card large">
         <h1>Create Account</h1>
-        <p className="auth-subtitle">Create your private trading journal user</p>
+        <p className="auth-subtitle">Start your private Exora journal</p>
 
         <form onSubmit={handleRegister} className="auth-form">
           <label>Full name</label>

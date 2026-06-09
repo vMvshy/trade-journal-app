@@ -13,6 +13,7 @@ import Dashboard from "./pages/Dashboard";
 import Journal from "./pages/Journal";
 import NewTrade from "./pages/NewTrade";
 import Notes from "./pages/Notes";
+import Profile from "./pages/Profile";
 // Importamos los estilos principales.
 import "./index.css";
 
@@ -62,6 +63,14 @@ export default function App() {
   }
 />
 
+<Route
+  path="/profile"
+  element={
+    <ProtectedRoute>
+      <Profile />
+    </ProtectedRoute>
+  }
+/>
           <Route
   path="/notes"
   element={

@@ -21,7 +21,16 @@ export function AuthProvider({ children }) {
 
     if (!error) {
       setProfile(data);
+      return data;
     }
+
+    return null;
+  };
+
+  // Refresca el perfil después de actualizar nombre, username o avatar.
+  const refreshProfile = async () => {
+    if (!user?.id) return null;
+    return await loadProfile(user.id);
   };
 
   useEffect(() => {
@@ -57,7 +66,7 @@ export function AuthProvider({ children }) {
     return () => {
       listener.subscription.unsubscribe();
     };
-  }, []);
+  }, [user?.id]);
 
   // Cerrar sesión.
   const logout = async () => {
@@ -67,7 +76,9 @@ export function AuthProvider({ children }) {
   };
 
   return (
-    <AuthContext.Provider value={{ user, profile, loading, logout }}>
+    <AuthContext.Provider
+      value={{ user, profile, loading, logout, refreshProfile }}
+    >
       {children}
     </AuthContext.Provider>
   );

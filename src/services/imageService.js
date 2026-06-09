@@ -91,3 +91,35 @@ export async function getSignedImageUrl(bucketName, imagePath) {
 
   return data.signedUrl;
 }
+
+// Sube una imagen de perfil circular para el usuario.
+export async function uploadProfileImage({ file, userId, oldAvatarPath }) {
+  const safeName = cleanFileName(file.name);
+  const imagePath = `${userId}/avatar-${Date.now()}-${safeName}`;
+
+  // Si ya existía una foto anterior, intentamos borrarla.
+  if (oldAvatarPath) {
+    await supabase.storage.from("profile-images").remove([oldAvatarPath]);
+  }
+
+  const { error: uploadError } = await supabase.storage
+    .from("profile-images")
+    .upload(imagePath, file);
+
+  if (uploadError) {
+    throw uploadError;
+  }
+
+  const { data, error } = await supabase
+    .from("profiles")
+    .update({ avatar_path: imagePath })
+    .eq("id", userId)
+    .select()
+    .single();
+
+  if (error) {
+    throw error;
+  }
+
+  return data;
+}
