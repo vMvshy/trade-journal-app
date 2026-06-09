@@ -869,3 +869,151 @@ body {
     align-items: flex-start;
   }
 }
+
+/* Página de Analytics */
+.analytics-grid {
+  margin-top: 28px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+}
+
+.analytics-grid.two-columns {
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.analytics-card,
+.analytics-panel {
+  background: #111821;
+  border: 1px solid #243244;
+  border-radius: 22px;
+  padding: 24px;
+}
+
+.analytics-card p {
+  color: #9fb0c3;
+  margin: 0;
+}
+
+.analytics-card h2 {
+  margin: 12px 0 0;
+  font-size: 30px;
+}
+
+.analytics-panel {
+  margin-top: 28px;
+}
+
+.analytics-panel h2 {
+  margin-top: 0;
+}
+
+.result-bars {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.bar-label {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 8px;
+  color: #d6e2f0;
+}
+
+.bar-track {
+  height: 12px;
+  background: #0b1118;
+  border: 1px solid #1f2a38;
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+.bar-fill {
+  height: 100%;
+  border-radius: 999px;
+}
+
+.win-bar {
+  background: #22c55e;
+}
+
+.loss-bar {
+  background: #ef4444;
+}
+
+.breakeven-bar {
+  background: #eab308;
+}
+
+.strategy-highlight {
+  background: #0b1118;
+  border: 1px solid #1f2a38;
+  border-radius: 18px;
+  padding: 18px;
+}
+
+.strategy-highlight h3 {
+  margin: 0 0 12px;
+}
+
+.strategy-highlight p {
+  color: #9fb0c3;
+  margin: 0;
+}
+
+.strategy-highlight strong {
+  display: block;
+  margin-top: 8px;
+  font-size: 28px;
+}
+
+.strategy-highlight span {
+  display: block;
+  margin-top: 8px;
+  color: #9fb0c3;
+}
+
+.big-insight {
+  font-size: 26px;
+  font-weight: 800;
+  color: #ffffff;
+  background: #0b1118;
+  border: 1px solid #1f2a38;
+  border-radius: 18px;
+  padding: 18px;
+  margin-bottom: 0;
+}
+
+.strategy-table {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.strategy-row {
+  display: grid;
+  grid-template-columns: 1.5fr repeat(5, 1fr);
+  gap: 12px;
+  align-items: center;
+  background: #0b1118;
+  border: 1px solid #1f2a38;
+  border-radius: 14px;
+  padding: 14px;
+}
+
+.strategy-head {
+  color: #9fb0c3;
+  font-weight: 700;
+}
+
+@media (max-width: 1100px) {
+  .analytics-grid,
+  .analytics-grid.two-columns {
+    grid-template-columns: 1fr;
+  }
+
+  .strategy-row {
+    grid-template-columns: 1fr 1fr;
+  }
+}

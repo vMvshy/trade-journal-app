@@ -8,6 +8,7 @@ import ProtectedRoute from "./auth/ProtectedRoute";
 // Importamos las páginas.
 import Login from "./pages/Login";
 import Register from "./pages/Register";
+import Analytics from "./pages/Analytics";
 import Dashboard from "./pages/Dashboard";
 import Journal from "./pages/Journal";
 import NewTrade from "./pages/NewTrade";
@@ -52,7 +53,15 @@ export default function App() {
               </ProtectedRoute>
             }
           />
-          
+<Route
+  path="/analytics"
+  element={
+    <ProtectedRoute>
+      <Analytics />
+    </ProtectedRoute>
+  }
+/>
+
           <Route
   path="/notes"
   element={
