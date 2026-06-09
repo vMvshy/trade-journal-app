@@ -38,17 +38,23 @@ export default function Login() {
       <div className="stars-layer"></div>
       <div className="grid-layer"></div>
 
+      {/* Botón para volver a la landing pública */}
+      <Link to="/" className="auth-back-link">
+        ← Back to Exora
+      </Link>
+
       <div className="auth-hero-copy">
-        <div className="auth-brand auth-brand-lockup">
+        <Link to="/" className="auth-brand auth-brand-lockup">
           <img
             src="/exora-brand-lockup-transparent.png"
             alt="Exora Trading OS"
           />
-        </div>
+        </Link>
 
         <h1>Trade with memory.</h1>
         <p>
-          Your private trading workspace for tracking trades, refining strategy, and reviewing performance.
+          Your private trading workspace for tracking trades, refining strategy,
+          and reviewing performance.
         </p>
       </div>
 

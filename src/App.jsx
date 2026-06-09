@@ -27,14 +27,17 @@ export default function App() {
     <BrowserRouter>
       <AuthProvider>
         <Routes>
-          {/* Landing pública */}
+          {/* Página pública principal */}
           <Route path="/" element={<Landing />} />
 
-          {/* Auth */}
+          {/* También dejamos /home como respaldo para abrir la landing */}
+          <Route path="/home" element={<Landing />} />
+
+          {/* Páginas públicas de autenticación */}
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
 
-          {/* App privada */}
+          {/* Páginas privadas de la app */}
           <Route
             path="/dashboard"
             element={
@@ -116,7 +119,7 @@ export default function App() {
             }
           />
 
-          {/* Ruta fallback */}
+          {/* Si alguien entra a una ruta que no existe, vuelve a la landing */}
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
       </AuthProvider>
