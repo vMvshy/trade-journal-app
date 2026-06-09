@@ -1,5 +1,6 @@
 // Página donde mostramos las entradas guardadas del journal.
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import { useAuth } from "../auth/AuthProvider";
 import Sidebar from "../components/Sidebar";
 import { deleteTrade, getUserTrades } from "../services/tradeService";
@@ -207,6 +208,10 @@ export default function Journal() {
                     ))}
                   </div>
                 )}
+
+                <Link className="view-trade-button" to={`/trade/${trade.id}`}>
+                  View Details
+                </Link>
 
                 {trade.tags?.length > 0 && (
                   <div className="tag-row">

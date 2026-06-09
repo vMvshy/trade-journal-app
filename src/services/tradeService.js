@@ -71,3 +71,19 @@ export async function deleteTrade(tradeId, userId) {
 
   return true;
 }
+
+// Buscar un solo trade por ID junto con sus imágenes.
+export async function getTradeById(tradeId, userId) {
+  const { data, error } = await supabase
+    .from("trades")
+    .select("*, trade_images(*)")
+    .eq("id", tradeId)
+    .eq("user_id", userId)
+    .single();
+
+  if (error) {
+    throw error;
+  }
+
+  return data;
+}

@@ -14,6 +14,7 @@ import Journal from "./pages/Journal";
 import NewTrade from "./pages/NewTrade";
 import Notes from "./pages/Notes";
 import Profile from "./pages/Profile";
+import TradeDetail from "./pages/TradeDetail";
 // Importamos los estilos principales.
 import "./index.css";
 
@@ -76,6 +77,14 @@ export default function App() {
   element={
     <ProtectedRoute>
       <Notes />
+    </ProtectedRoute>
+  }
+/>
+<Route
+  path="/trade/:id"
+  element={
+    <ProtectedRoute>
+      <TradeDetail />
     </ProtectedRoute>
   }
 />
