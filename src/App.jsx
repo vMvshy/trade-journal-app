@@ -16,6 +16,7 @@ import Notes from "./pages/Notes";
 import Profile from "./pages/Profile";
 import TradeDetail from "./pages/TradeDetail";
 import EditTrade from "./pages/EditTrade";
+import EditNote from "./pages/EditNote";
 // Importamos los estilos principales.
 import "./index.css";
 
@@ -94,6 +95,14 @@ export default function App() {
   element={
     <ProtectedRoute>
       <EditTrade />
+    </ProtectedRoute>
+  }
+/>
+<Route
+  path="/notes/:id/edit"
+  element={
+    <ProtectedRoute>
+      <EditNote />
     </ProtectedRoute>
   }
 />

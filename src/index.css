@@ -1696,3 +1696,9 @@ body {
 .edit-trade-button:hover {
   background: rgba(47, 125, 246, 0.22);
 }
+
+.note-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}

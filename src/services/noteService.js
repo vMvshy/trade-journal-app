@@ -71,3 +71,36 @@ export async function deleteNote(noteId, userId) {
 
   return true;
 }
+
+// Buscar una nota específica por ID.
+export async function getNoteById(noteId, userId) {
+  const { data, error } = await supabase
+    .from("notebook_notes")
+    .select("*, notebook_images(*)")
+    .eq("id", noteId)
+    .eq("user_id", userId)
+    .single();
+
+  if (error) {
+    throw error;
+  }
+
+  return data;
+}
+
+// Actualizar una nota existente.
+export async function updateNote(noteId, userId, noteData) {
+  const { data, error } = await supabase
+    .from("notebook_notes")
+    .update(noteData)
+    .eq("id", noteId)
+    .eq("user_id", userId)
+    .select()
+    .single();
+
+  if (error) {
+    throw error;
+  }
+
+  return data;
+}

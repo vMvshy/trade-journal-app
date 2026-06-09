@@ -1,5 +1,6 @@
 // Página de notas tipo cuaderno/libro.
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import Sidebar from "../components/Sidebar";
 import { useAuth } from "../auth/AuthProvider";
 import { createNote, deleteNote, getUserNotes } from "../services/noteService";
@@ -207,14 +208,23 @@ export default function Notes() {
                     <div className="note-title-row">
                       <h2>{note.title}</h2>
 
-                      <button
-                        type="button"
-                        className="delete-button"
-                        onClick={() => handleDeleteNote(note.id)}
-                        disabled={deletingId === note.id}
-                      >
-                        {deletingId === note.id ? "Deleting..." : "Delete"}
-                      </button>
+                      <div className="note-actions">
+                        <Link
+                          className="edit-trade-button"
+                          to={`/notes/${note.id}/edit`}
+                        >
+                          Edit
+                        </Link>
+
+                        <button
+                          type="button"
+                          className="delete-button"
+                          onClick={() => handleDeleteNote(note.id)}
+                          disabled={deletingId === note.id}
+                        >
+                          {deletingId === note.id ? "Deleting..." : "Delete"}
+                        </button>
+                      </div>
                     </div>
 
                     <p className="note-content">{note.content}</p>
