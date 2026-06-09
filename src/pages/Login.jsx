@@ -1,7 +1,6 @@
 // Página de login de Exora.
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { Sparkles } from "lucide-react";
 import { supabase } from "../lib/supabaseClient";
 
 export default function Login() {
@@ -40,11 +39,11 @@ export default function Login() {
       <div className="grid-layer"></div>
 
       <div className="auth-hero-copy">
-        <div className="auth-brand">
-          <div className="brand-icon big">
-            <Sparkles size={26} />
-          </div>
-          <span>Exora</span>
+        <div className="auth-brand auth-brand-lockup">
+          <img
+            src="/exora-brand-lockup-transparent.png"
+            alt="Exora Trading OS"
+          />
         </div>
 
         <h1>Trade with memory.</h1>

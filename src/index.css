@@ -1702,3 +1702,320 @@ body {
   align-items: center;
   gap: 10px;
 }
+
+/* Exora real logo image */
+.app-logo-icon {
+  overflow: hidden;
+  padding: 0;
+  background: transparent !important;
+}
+
+.app-logo-icon img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+  border-radius: inherit;
+}
+
+/* ========================= */
+/* EXORA COLOR THEME UPGRADE */
+/* Inspired by Exora Trading OS branding */
+/* ========================= */
+
+:root {
+  --exora-bg: #030712;
+  --exora-bg-soft: #07111f;
+  --exora-panel: rgba(10, 18, 34, 0.88);
+  --exora-panel-solid: #0b1220;
+  --exora-panel-light: #101a2e;
+  --exora-border: rgba(125, 156, 255, 0.22);
+
+  --exora-blue: #2f7df6;
+  --exora-blue-bright: #42a5ff;
+  --exora-cyan: #38d5ff;
+  --exora-purple: #8b5cf6;
+  --exora-violet: #a855f7;
+
+  --exora-text: #f8fbff;
+  --exora-muted: #9fb3d1;
+
+  --exora-glow-blue: rgba(47, 125, 246, 0.35);
+  --exora-glow-purple: rgba(139, 92, 246, 0.32);
+}
+
+/* Fondo general más premium */
+body {
+  background:
+    radial-gradient(circle at 15% 0%, rgba(47, 125, 246, 0.22), transparent 28%),
+    radial-gradient(circle at 85% 10%, rgba(139, 92, 246, 0.18), transparent 30%),
+    radial-gradient(circle at 50% 100%, rgba(56, 213, 255, 0.08), transparent 28%),
+    linear-gradient(180deg, #020617 0%, #030712 50%, #050816 100%) !important;
+  color: var(--exora-text);
+}
+
+/* Layout principal */
+.app-layout {
+  background:
+    radial-gradient(circle at top left, rgba(47, 125, 246, 0.1), transparent 32%),
+    radial-gradient(circle at bottom right, rgba(139, 92, 246, 0.09), transparent 34%),
+    var(--exora-bg) !important;
+}
+
+/* Sidebar más parecido al branding */
+.exora-sidebar,
+.sidebar {
+  background:
+    linear-gradient(180deg, rgba(7, 17, 31, 0.98), rgba(2, 6, 23, 0.98)),
+    #020617 !important;
+  border-right: 1px solid rgba(125, 156, 255, 0.16) !important;
+  box-shadow: 18px 0 60px rgba(0, 0, 0, 0.28);
+}
+
+/* Logo / icon container */
+.brand-icon {
+  background:
+    linear-gradient(135deg, #2f7df6 0%, #6d5dfc 45%, #a855f7 100%) !important;
+  box-shadow:
+    0 0 24px rgba(47, 125, 246, 0.32),
+    0 0 44px rgba(139, 92, 246, 0.2);
+}
+
+/* Navegación premium */
+.premium-nav a {
+  color: #c7d7f5 !important;
+  text-decoration: none !important;
+}
+
+.premium-nav a:hover {
+  background: rgba(66, 165, 255, 0.08) !important;
+  border-color: rgba(66, 165, 255, 0.22) !important;
+  color: #ffffff !important;
+}
+
+.premium-nav a.active {
+  background:
+    linear-gradient(135deg, #2f7df6 0%, #6d5dfc 48%, #9b5cf6 100%) !important;
+  border-color: rgba(255, 255, 255, 0.16) !important;
+  box-shadow:
+    0 14px 36px rgba(47, 125, 246, 0.28),
+    0 0 34px rgba(139, 92, 246, 0.18) !important;
+}
+
+/* Cards/paneles con tono más Exora */
+.stat-card,
+.trade-card,
+.form-section,
+.note-page,
+.note-book-form,
+.analytics-card,
+.analytics-panel,
+.dashboard-panel,
+.profile-card,
+.profile-note-card,
+.book-preview,
+.trade-book-page {
+  background:
+    linear-gradient(180deg, rgba(13, 24, 44, 0.94), rgba(4, 10, 24, 0.88)) !important;
+  border: 1px solid var(--exora-border) !important;
+  box-shadow:
+    0 18px 60px rgba(0, 0, 0, 0.28),
+    inset 0 1px 0 rgba(255, 255, 255, 0.035) !important;
+}
+
+/* Inputs */
+input,
+select,
+textarea,
+.form-section input,
+.form-section select,
+.form-section textarea,
+.note-book-form input,
+.note-book-form textarea,
+.journal-toolbar input,
+.auth-form input {
+  background: rgba(3, 9, 22, 0.9) !important;
+  border-color: rgba(125, 156, 255, 0.22) !important;
+  color: #f8fbff !important;
+}
+
+input:focus,
+select:focus,
+textarea:focus,
+.auth-form input:focus {
+  border-color: var(--exora-blue-bright) !important;
+  box-shadow:
+    0 0 0 4px rgba(47, 125, 246, 0.14),
+    0 0 24px rgba(47, 125, 246, 0.16) !important;
+}
+
+/* Botones principales */
+.auth-form button,
+.save-trade-button,
+.primary-link-button,
+.note-book-form button,
+.book-preview button {
+  background:
+    linear-gradient(135deg, #2f7df6 0%, #6d5dfc 50%, #a855f7 100%) !important;
+  box-shadow:
+    0 14px 34px rgba(47, 125, 246, 0.28),
+    0 0 28px rgba(139, 92, 246, 0.16) !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+}
+
+.auth-form button:hover,
+.save-trade-button:hover,
+.primary-link-button:hover,
+.note-book-form button:hover {
+  transform: translateY(-1px);
+  box-shadow:
+    0 18px 44px rgba(47, 125, 246, 0.34),
+    0 0 34px rgba(139, 92, 246, 0.22) !important;
+}
+
+/* Auth/Login galaxy más parecido al brand */
+.exora-auth-page {
+  background:
+    radial-gradient(circle at 25% 12%, rgba(47, 125, 246, 0.28), transparent 26%),
+    radial-gradient(circle at 78% 25%, rgba(168, 85, 247, 0.22), transparent 28%),
+    radial-gradient(circle at 50% 100%, rgba(56, 213, 255, 0.1), transparent 34%),
+    linear-gradient(180deg, #020617 0%, #030712 55%, #050816 100%) !important;
+}
+
+.exora-auth-card {
+  background:
+    linear-gradient(180deg, rgba(13, 24, 44, 0.92), rgba(3, 9, 22, 0.9)) !important;
+  border: 1px solid rgba(125, 156, 255, 0.24) !important;
+  box-shadow:
+    0 35px 120px rgba(0, 0, 0, 0.72),
+    0 0 90px rgba(47, 125, 246, 0.14),
+    0 0 70px rgba(139, 92, 246, 0.12) !important;
+}
+
+/* Textos */
+.dashboard-header p,
+.auth-subtitle,
+.book-preview p,
+.profile-note-card p,
+.trade-card p,
+.note-content,
+.analytics-card p {
+  color: var(--exora-muted) !important;
+}
+
+/* Profit/loss más premium */
+.profit-text {
+  color: #39f58c !important;
+  text-shadow: 0 0 18px rgba(57, 245, 140, 0.22);
+}
+
+.loss-text {
+  color: #ff6b7a !important;
+  text-shadow: 0 0 18px rgba(255, 107, 122, 0.18);
+}
+
+/* Badges */
+.result-badge.win {
+  background: rgba(57, 245, 140, 0.13) !important;
+  color: #39f58c !important;
+  border: 1px solid rgba(57, 245, 140, 0.24);
+}
+
+.result-badge.loss {
+  background: rgba(255, 107, 122, 0.13) !important;
+  color: #ff6b7a !important;
+  border: 1px solid rgba(255, 107, 122, 0.24);
+}
+
+.result-badge.breakeven {
+  background: rgba(255, 209, 102, 0.13) !important;
+  color: #ffd166 !important;
+  border: 1px solid rgba(255, 209, 102, 0.24);
+}
+
+/* Tags */
+.tag-row span {
+  background: rgba(47, 125, 246, 0.12) !important;
+  color: #a9ccff !important;
+  border: 1px solid rgba(47, 125, 246, 0.25);
+}
+
+/* Avatar glow */
+.profile-avatar-image,
+.profile-avatar,
+.sidebar-profile-mini img,
+.sidebar-avatar-fallback {
+  box-shadow:
+    0 0 0 2px rgba(125, 156, 255, 0.22),
+    0 0 32px rgba(47, 125, 246, 0.25) !important;
+}
+
+/* Scrollbar aesthetic */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #030712;
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #2f7df6, #8b5cf6);
+  border-radius: 999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, #42a5ff, #a855f7);
+}
+
+/* ========================= */
+/* EXORA LOGO ASSETS */
+/* ========================= */
+
+/* Logo completo del sidebar */
+.brand-lockup-block {
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+.brand-lockup-img {
+  width: 190px;
+  max-width: 100%;
+  height: auto;
+  object-fit: contain;
+  filter:
+    drop-shadow(0 0 18px rgba(47, 125, 246, 0.28))
+    drop-shadow(0 0 24px rgba(139, 92, 246, 0.16));
+}
+
+/* Logo completo en login/register */
+.auth-brand-lockup {
+  display: block;
+  margin-bottom: 30px;
+}
+
+.auth-brand-lockup img {
+  width: 360px;
+  max-width: 100%;
+  height: auto;
+  object-fit: contain;
+  filter:
+    drop-shadow(0 0 22px rgba(47, 125, 246, 0.28))
+    drop-shadow(0 0 32px rgba(139, 92, 246, 0.18));
+}
+
+/* Icono real cuando se use solo */
+.app-logo-icon {
+  overflow: hidden;
+  padding: 0;
+  background: transparent !important;
+}
+
+.app-logo-icon img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+  border-radius: inherit;
+}

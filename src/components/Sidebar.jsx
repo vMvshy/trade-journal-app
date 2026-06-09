@@ -6,7 +6,6 @@ import {
   LogOut,
   NotebookText,
   PlusCircle,
-  Sparkles,
   User,
 } from "lucide-react";
 import { NavLink } from "react-router-dom";
@@ -47,15 +46,12 @@ export default function Sidebar() {
   return (
     <aside className="sidebar exora-sidebar">
       <div>
-        <div className="brand-block">
-          <div className="brand-icon">
-            <Sparkles size={20} />
-          </div>
-
-          <div>
-            <h2>Exora</h2>
-            <p>Trading OS</p>
-          </div>
+        <div className="brand-block brand-lockup-block">
+          <img
+            className="brand-lockup-img"
+            src="/exora-brand-lockup-transparent.png"
+            alt="Exora Trading OS"
+          />
         </div>
 
         <div className="sidebar-profile-mini">
