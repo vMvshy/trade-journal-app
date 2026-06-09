@@ -1,9 +1,42 @@
 // Servicio para subir y leer imágenes privadas desde Supabase Storage.
 import { supabase } from "../lib/supabaseClient";
 
+// Cache simple para no pedir la misma URL firmada muchas veces.
+const signedImageUrlCache = new Map();
+
 // Limpia el nombre del archivo para evitar errores por espacios o símbolos raros.
 function cleanFileName(fileName) {
   return fileName.replace(/[^a-zA-Z0-9._-]/g, "_");
+}
+
+// Crea una llave única para guardar cada imagen en cache.
+function createCacheKey(bucketName, imagePath) {
+  return `${bucketName}:${imagePath}`;
+}
+
+// Lee una URL firmada desde cache si todavía no expiró.
+export function getCachedSignedImageUrlSync(bucketName, imagePath) {
+  if (!bucketName || !imagePath) return "";
+
+  const cacheKey = createCacheKey(bucketName, imagePath);
+  const cachedItem = signedImageUrlCache.get(cacheKey);
+
+  if (!cachedItem) return "";
+
+  if (Date.now() > cachedItem.expiresAt) {
+    signedImageUrlCache.delete(cacheKey);
+    return "";
+  }
+
+  return cachedItem.url;
+}
+
+// Limpia una URL específica del cache.
+export function clearSignedImageUrlCache(bucketName, imagePath) {
+  if (!bucketName || !imagePath) return;
+
+  const cacheKey = createCacheKey(bucketName, imagePath);
+  signedImageUrlCache.delete(cacheKey);
 }
 
 // Sube una imagen relacionada a una nota del cuaderno.
@@ -80,7 +113,21 @@ export async function uploadTradeImage({
 }
 
 // Crea una URL temporal para poder ver imágenes privadas.
-export async function getSignedImageUrl(bucketName, imagePath) {
+export async function getSignedImageUrl(bucketName, imagePath, options = {}) {
+  const { forceRefresh = false } = options;
+
+  if (!bucketName || !imagePath) return "";
+
+  const cacheKey = createCacheKey(bucketName, imagePath);
+
+  if (!forceRefresh) {
+    const cachedUrl = getCachedSignedImageUrlSync(bucketName, imagePath);
+
+    if (cachedUrl) {
+      return cachedUrl;
+    }
+  }
+
   const { data, error } = await supabase.storage
     .from(bucketName)
     .createSignedUrl(imagePath, 60 * 60);
@@ -89,7 +136,15 @@ export async function getSignedImageUrl(bucketName, imagePath) {
     throw error;
   }
 
-  return data.signedUrl;
+  const signedUrl = data.signedUrl;
+
+  // La URL dura 60 minutos. La guardamos por 55 para evitar usarla justo al expirar.
+  signedImageUrlCache.set(cacheKey, {
+    url: signedUrl,
+    expiresAt: Date.now() + 55 * 60 * 1000,
+  });
+
+  return signedUrl;
 }
 
 // Sube una imagen de perfil circular para el usuario.
@@ -100,6 +155,7 @@ export async function uploadProfileImage({ file, userId, oldAvatarPath }) {
   // Si ya existía una foto anterior, intentamos borrarla.
   if (oldAvatarPath) {
     await supabase.storage.from("profile-images").remove([oldAvatarPath]);
+    clearSignedImageUrlCache("profile-images", oldAvatarPath);
   }
 
   const { error: uploadError } = await supabase.storage

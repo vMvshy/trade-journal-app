@@ -1,14 +1,16 @@
 // Importamos React y Supabase.
 import { createContext, useContext, useEffect, useState } from "react";
 import { supabase } from "../lib/supabaseClient";
+import { getSignedImageUrl } from "../services/imageService";
 
 // Creamos el contexto de autenticación.
 const AuthContext = createContext(null);
 
-// Este provider guarda el usuario actual y su perfil.
+// Este provider guarda el usuario actual, su perfil y la foto de perfil ya cargada.
 export function AuthProvider({ children }) {
   const [user, setUser] = useState(null);
   const [profile, setProfile] = useState(null);
+  const [avatarUrl, setAvatarUrl] = useState("");
   const [loading, setLoading] = useState(true);
 
   // Función para cargar el perfil del usuario desde la tabla profiles.
@@ -19,12 +21,28 @@ export function AuthProvider({ children }) {
       .eq("id", userId)
       .single();
 
-    if (!error) {
-      setProfile(data);
-      return data;
+    if (error) {
+      setProfile(null);
+      setAvatarUrl("");
+      return null;
     }
 
-    return null;
+    setProfile(data);
+
+    // Si el perfil tiene avatar, cargamos la URL firmada una sola vez.
+    if (data?.avatar_path) {
+      try {
+        const url = await getSignedImageUrl("profile-images", data.avatar_path);
+        setAvatarUrl(url);
+      } catch (error) {
+        console.error(error.message);
+        setAvatarUrl("");
+      }
+    } else {
+      setAvatarUrl("");
+    }
+
+    return data;
   };
 
   // Refresca el perfil después de actualizar nombre, username o avatar.
@@ -41,6 +59,10 @@ export function AuthProvider({ children }) {
       if (data.session?.user) {
         setUser(data.session.user);
         await loadProfile(data.session.user.id);
+      } else {
+        setUser(null);
+        setProfile(null);
+        setAvatarUrl("");
       }
 
       setLoading(false);
@@ -51,12 +73,15 @@ export function AuthProvider({ children }) {
     // Escuchamos cambios de login/logout.
     const { data: listener } = supabase.auth.onAuthStateChange(
       async (_event, session) => {
+        setLoading(true);
+
         if (session?.user) {
           setUser(session.user);
           await loadProfile(session.user.id);
         } else {
           setUser(null);
           setProfile(null);
+          setAvatarUrl("");
         }
 
         setLoading(false);
@@ -66,18 +91,19 @@ export function AuthProvider({ children }) {
     return () => {
       listener.subscription.unsubscribe();
     };
-  }, [user?.id]);
+  }, []);
 
   // Cerrar sesión.
   const logout = async () => {
     await supabase.auth.signOut();
     setUser(null);
     setProfile(null);
+    setAvatarUrl("");
   };
 
   return (
     <AuthContext.Provider
-      value={{ user, profile, loading, logout, refreshProfile }}
+      value={{ user, profile, avatarUrl, loading, logout, refreshProfile }}
     >
       {children}
     </AuthContext.Provider>

@@ -10,29 +10,22 @@ import {
 } from "lucide-react";
 import { NavLink } from "react-router-dom";
 import { useAuth } from "../auth/AuthProvider";
-import { getSignedImageUrl } from "../services/imageService";
 
 export default function Sidebar() {
-  const { profile, logout } = useAuth();
-  const [avatarUrl, setAvatarUrl] = useState("");
+  const { profile, avatarUrl, logout } = useAuth();
 
+  // Esto evita que si una imagen falla, se quede rota visualmente.
+  const [avatarFailed, setAvatarFailed] = useState(false);
+
+  // Cada vez que cambie la URL del avatar, reiniciamos el estado de error.
   useEffect(() => {
-    const loadAvatar = async () => {
-      if (!profile?.avatar_path) {
-        setAvatarUrl("");
-        return;
-      }
+    setAvatarFailed(false);
+  }, [avatarUrl]);
 
-      try {
-        const url = await getSignedImageUrl("profile-images", profile.avatar_path);
-        setAvatarUrl(url);
-      } catch (error) {
-        console.error(error.message);
-      }
-    };
-
-    loadAvatar();
-  }, [profile?.avatar_path]);
+  const avatarFallback =
+    profile?.full_name?.charAt(0)?.toUpperCase() ||
+    profile?.username?.charAt(0)?.toUpperCase() ||
+    "T";
 
   const navItems = [
     { to: "/dashboard", label: "Dashboard", icon: Home },
@@ -55,12 +48,16 @@ export default function Sidebar() {
         </div>
 
         <div className="sidebar-profile-mini">
-          {avatarUrl ? (
-            <img src={avatarUrl} alt="Profile" />
+          {avatarUrl && !avatarFailed ? (
+            <img
+              src={avatarUrl}
+              alt="Profile"
+              loading="eager"
+              decoding="async"
+              onError={() => setAvatarFailed(true)}
+            />
           ) : (
-            <div className="sidebar-avatar-fallback">
-              {profile?.full_name?.charAt(0)?.toUpperCase() || "T"}
-            </div>
+            <div className="sidebar-avatar-fallback">{avatarFallback}</div>
           )}
 
           <div>
