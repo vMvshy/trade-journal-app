@@ -1,6 +1,9 @@
 // Importamos React Router para manejar las páginas.
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 
+// Importamos Speed Insights de Vercel.
+import { SpeedInsights } from "@vercel/speed-insights/react";
+
 // Importamos el provider de autenticación.
 import { AuthProvider } from "./auth/AuthProvider";
 import ProtectedRoute from "./auth/ProtectedRoute";
@@ -122,6 +125,9 @@ export default function App() {
           {/* Si alguien entra a una ruta que no existe, vuelve a la landing */}
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
+
+        {/* Vercel Speed Insights */}
+        <SpeedInsights />
       </AuthProvider>
     </BrowserRouter>
   );
